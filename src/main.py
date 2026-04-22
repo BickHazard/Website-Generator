@@ -19,7 +19,7 @@ def main():
         shutil.rmtree('docs')
     os.mkdir('docs')
     copy_site_recursive('static', 'docs')
-    #generate_page("content/index.md", "template.html", "public/index.html", basepath)
+    
     if not os.path.exists("docs"):
         os.mkdir("docs")
     generate_pages_recursive("content", "template.html", "docs", basepath)
