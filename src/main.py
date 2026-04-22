@@ -5,19 +5,24 @@ from gencontent import generate_pages_recursive
 
 import shutil
 import os
-
+import sys
 
 def main():
-    node = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
-    print(node)
-    if os.path.exists('public'):
-        shutil.rmtree('public')
-    os.mkdir('public')
-    copy_site_recursive('static', 'public')
-    generate_page("content/index.md", "template.html", "public/index.html")
-    if not os.path.exists("public"):
-        os.mkdir("public")
-    generate_pages_recursive("content", "template.html", "public")
+    if  len(sys.argv) <= 1:
+        basepath = "/"
+    else:
+        basepath = sys.argv[1]
+    
+    #node = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
+    #print(node)
+    if os.path.exists('docs'):
+        shutil.rmtree('docs')
+    os.mkdir('docs')
+    copy_site_recursive('static', 'docs')
+    #generate_page("content/index.md", "template.html", "public/index.html", basepath)
+    if not os.path.exists("docs"):
+        os.mkdir("docs")
+    generate_pages_recursive("content", "template.html", "docs", basepath)
 
 
 
